@@ -10,7 +10,7 @@
 
 ### 基本流程
 
-1. 首先选择一个文件夹创建 ```webpack-simple``` 项目，使用 ```vue-vci``` 命令。
+1. 首先选择一个文件夹创建 ```webpack-simple``` 项目，使用命令。
 
     ```
     vue init webpack-simple xxx(your project name)
