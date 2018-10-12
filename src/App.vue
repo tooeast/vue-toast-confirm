@@ -37,7 +37,7 @@ export default {
       this.$side({
         type: 'warnning',
         msg: "warnning!!!!!!!!",
-        duration: 30000
+        duration: 3000
       })
     }
   }

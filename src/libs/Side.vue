@@ -1,6 +1,6 @@
 <template>
   <div class="vue-toast-confirm-vdialog" :data-id="dataId" :class="[isAnimation ? 'vue-toast-confirm-animationOut' : 'vue-toast-confirm-animationIn']">
-    <div class="vue-toast-confirm-area" :class="getShowType">
+    <div class="vue-toast-confirm-area" :class="getShowType" v-on:mouseenter="dialogMouseEnter" v-on:mouseleave="dialogMouseLeave">
       <div class="vue-toast-confirm-info-area">
         <p>{{ msg }}</p>
       </div>
@@ -25,7 +25,8 @@ export default {
   },
   data () {
     return {
-      isAnimation: false
+      isAnimation: false,
+      timer: null
     }
   },
   computed: {
@@ -43,7 +44,7 @@ export default {
   },
   methods: {
     timeLine () {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.closeDialog(this.dataId)
       }, this.getDuration)
     },
@@ -52,6 +53,19 @@ export default {
       setTimeout(() => {
         this.$emit('sideClose', id)
       }, 800);
+    },
+    dialogMouseEnter () {
+      // this.timer = setTimeout(() => {
+      //   this.closeDialog(this.dataId)
+      // }, this.getDuration)
+
+      clearTimeout(this.timer)
+      this.timer = null
+    },
+    dialogMouseLeave () {
+      this.timer = setTimeout(() => {
+        this.closeDialog(this.dataId)
+      }, this.getDuration)
     }
   }
 }
