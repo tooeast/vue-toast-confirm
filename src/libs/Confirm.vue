@@ -1,12 +1,30 @@
 <template>
-  <div class="vdialog">
-    <div class="mask"></div>
-    <div class="area">
-      <div class="title-area"><i v-if="type" class="title-icon" :class="getShowType"></i>{{ title }}</div>
-      <div class="info-area">{{ content }}</div>
-      <div class="btn-area">
-        <button class="btn-confirm" @click="dialogConfirm">{{ confirmText }}</button>
-        <button v-if="cancelText" class="btn-cancel" @click="closeDialog">{{ cancelText }}</button>
+  <div class="vue-toast-confirm-vdialog">
+    <div class="vue-toast-confirm-mask"></div>
+    <div class="vue-toast-confirm-area">
+      <div class="vue-toast-confirm-title-area">
+        <i v-if="type" class="vue-toast-confirm-title-icon" :class="getShowType">
+          <svg v-if="type == 'success'" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17">
+            <path d="M977.696 64c-37.408 0-60.832 17.728-60.832 17.728s-159.2 106.88-304.832 248.256c0 0-93.12 82.112-280.576 320.064l-257.6-194.496c0 0-38.944-21.92-64.384 16.64-21.312 32.32 0 64.224 0 64.224l262.176 370.208c0 0 37.376 53.408 59.136 53.408 27.136 0 38.912-25.76 77.248-88 54.944-89.184 130.688-214.24 216.128-335.616 120.352-170.976 216.384-270.08 293.728-348.256 35.648-36.032 88.832-79.072 104.544-96.224C1030.112 83.552 1008.864 64 977.696 64z" fill="#fff">
+            </path>
+          </svg>
+          <svg v-if="type == 'warnning'" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18">
+            <path d="M511 1024c-57.3 0-103.5-48.2-103.5-106.5 0-59.3 46.2-106.5 103.5-106.5 57.3 0 103.5 48.2 103.5 106.5S568.3 1024 511 1024z" p-id="5398" fill="#fff">
+            </path>
+            <path d="M507.8 744.1 507.8 744.1c-26.4 0-79-54.6-79-109l-60-496.1c0-54.5 35.3-139 139-139l0 0c107.2 0 139 84.6 139 139l-60 506.1C586.8 699.5 536 744.1 507.8 744.1z" fill="#fff">
+            </path>
+          </svg>
+          <svg v-if="type == 'error'" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15">
+            <path d="M910.848 357.888l-190.668 167.526 255.692 291.124c44.236 50.278 50.074 115.814 16.178 149.812l-25.6 25.702c-33.894 33.894-99.43 28.058-149.812-16.178l-304.64-267.572L207.46 975.77c-50.278 44.134-115.814 50.074-149.812 16.178l-25.6-25.702c-33.894-33.894-28.058-99.43 16.078-149.708L303.82 525.414l-190.67-167.526c-131.584-115.61-120.626-192-57.652-254.976l47.514-47.514C165.988-7.578 242.378-18.536 357.988 113.05l154.01 175.514 154.112-175.412c115.61-131.686 192-120.626 254.874-57.652l47.514 47.514c62.874 62.874 73.934 139.264-57.65 254.874z" fill="#fff">
+            </path>
+          </svg>
+        </i>
+        <span>{{ title }}</span>
+      </div>
+      <div class="vue-toast-confirm-info-area">{{ content }}</div>
+      <div class="vue-toast-confirm-btn-area">
+        <button class="vue-toast-confirm-btn-confirm" @click="dialogConfirm">{{ confirmText }}</button>
+        <button v-if="cancelText" class="vue-toast-confirm-btn-cancel" @click="closeDialog">{{ cancelText }}</button>
       </div>
     </div>
   </div>
@@ -40,7 +58,7 @@ export default {
   },
   computed: {
     getShowType () {
-      return `icon-${this.type}`
+      return `vue-toast-confirm-icon-${this.type}`
     }
   },
   methods: {
@@ -50,7 +68,6 @@ export default {
       }, this.getDuration)
     },
     closeDialog () {
-      // this.$emit('close')
       this.cancel()
     },
     dialogConfirm () {
@@ -61,8 +78,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vdialog {
-  .mask {
+.vue-toast-confirm-vdialog {
+  .vue-toast-confirm-mask {
     position: fixed;
     top: 0;
     right: 0;
@@ -72,7 +89,7 @@ export default {
     z-index: 100;
   }
 
-  .area {
+  .vue-toast-confirm-area {
     display: flex;
     position: fixed;
     left: 50%;
@@ -81,16 +98,18 @@ export default {
     width: 360px;
     max-width: 80%;
     min-width: 140px;
-    // height: 200px;
     flex-direction: column;
     background-color: #fff;
     border-radius: 4px;
     z-index: 101;
 
-    .title-area {
+    .vue-toast-confirm-title-area {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
       height: 28px;
       padding: 15px 18px 5px;
-
       line-height: 28px;
       font-size: 18px;
       font-weight: 450;
@@ -99,46 +118,41 @@ export default {
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      .title-icon {
-        display: inline-block;
-        vertical-align: middle;
+      .vue-toast-confirm-title-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 23px;
         height: 23px;
         border-radius: 50%;
         margin-right: 8px;
-        text-align: center;
-        line-height: 23px;
 
-        &.icon-success {
-          color: #fff;
-          font-size: 17px;
+        svg {
+          display: inline;
+        }
+
+        &.vue-toast-confirm-icon-success {
           background-color: #02e94b;
         }
 
-        &.icon-warnning {
-          color: #fff;
-          font-size: 17px;
+        &.vue-toast-confirm-icon-warnning {
           background-color: #55bbc2;
         }
 
-        &.icon-error {
-          color: #fff;
-          font-size: 14px;
+        &.vue-toast-confirm-icon-error {
           background-color: #f44343;
         }
       }
     }
 
-    .info-area {
-      // flex-grow: 1;
-      // min-height: 40px;
+    .vue-toast-confirm-info-area {
       line-height: 1.5;
       padding: 10px 18px;
       font-size: 15px;
       color: #535355;
     }
 
-    .btn-area {
+    .vue-toast-confirm-btn-area {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -159,7 +173,7 @@ export default {
         transition: .2s;
       }
 
-      .btn-cancel {
+      .vue-toast-confirm-btn-cancel {
         margin-left: 10px;
         border-color: #a2a2a2;
 
@@ -169,7 +183,7 @@ export default {
         }
       }
 
-      .btn-confirm {
+      .vue-toast-confirm-btn-confirm {
         border-color: #00bbff;
         background-color: #00bbff;
         color: #fff;
@@ -184,43 +198,4 @@ export default {
 }
 </style>
 
-<style scoped>
-@font-face {
-  font-family: 'icomoon';
-  src:  url('./fonts/icomoon.eot?wviqf');
-  src:  url('./fonts/icomoon.eot?wviqf#iefix') format('embedded-opentype'),
-    url('./fonts/icomoon.ttf?wviqf') format('truetype'),
-    url('./fonts/icomoon.woff?wviqf') format('woff'),
-    url('./fonts/icomoon.svg?wviqf#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 
-[class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-error:before {
-  content: "\e90b";
-  /* color: #bfbfbf; */
-}
-.icon-success:before {
-  content: "\e90c";
-  /* color: #bfbfbf; */
-}
-.icon-warnning:before {
-  content: "\e90d";
-  /* color: #bfbfbf; */
-}
-</style>

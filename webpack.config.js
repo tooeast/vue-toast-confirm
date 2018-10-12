@@ -2,16 +2,16 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/libs/index.js',
   // entry: './src/main.js',
+  entry: './src/libs/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'vue-toast-confirm.js',
     // filename: 'build.js',
+    filename: 'vue-toast-confirm.js',
     library: 'vue-toast-confirm',
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true 
   },
   externals: {
     vue: {
@@ -77,10 +77,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg|woff2?|eot|ttf|otf)$/,
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
         loader: 'file-loader',
         options: {
-          name: 'fonts/[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]'
         }
       }
     ]
