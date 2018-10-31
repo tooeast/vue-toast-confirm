@@ -12,12 +12,12 @@
 
 1. 首先选择一个文件夹创建 ```webpack-simple``` 项目，使用命令。
 
-    ```
+    ```bash
     vue init webpack-simple xxx(your project name)
     ```
     然后进入目录安装依赖
 
-    ```
+    ```bash
     cd xxx(your project name)
 
     npm install
@@ -35,7 +35,7 @@
     
     插件想要能够在文件中被使用，必须要有一个 ```install``` 的函数，所以在 ```libs``` 目录下新建一个 ```index.js``` 文件，基本结构如下：
 
-    ```
+    ```javascript
     const pulginName = {
         install () {
 
@@ -48,7 +48,7 @@
 
     这里的 ```install``` 是必须的。以下是我的 ```index.js``` 内容:
 
-    ```
+    ```javascript
       import Vue from 'vue'
       import Toast from './Toast.vue'
       import Confirm from './Confirm.vue'
@@ -115,7 +115,7 @@
 
     可以看到我们添加了 ```$toast``` 、 ```$confirm``` 、 ```$close``` 三个全局函数到 ```Vue``` 上。引入了两个文件就是插件的主要内容，这里举例 ```Toast.vue``` 的内容:
     
-    ```
+    ```html
     <template>
       <div class="vdialog">
         <div class="mask"></div>
@@ -167,13 +167,13 @@
     </script>
 
     <style lang="scss" scoped>
-    // scss ...
+    // scss ...
     </style>
 
     ```
     在 ```main.js``` 中引入我们的插件，就可以使用了。
 
-    ```
+    ```javascript
     import Vue from 'vue'
     import App from './App.vue'
 
@@ -192,7 +192,7 @@
 
     打包的任务当然是交给 ```webpack-simple``` 来完成，找到文件 ```webpack.config.js``` 修改其中内容:
 
-    ```
+    ```javascript
     var path = require('path')
     var webpack = require('webpack')
 
