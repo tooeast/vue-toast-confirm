@@ -2,25 +2,25 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  // entry: './src/main.js',
-  entry: './src/libs/index.js',
+  entry: './src/main.js',
+  // entry: './src/libs/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    // filename: 'build.js',
-    filename: 'vue-toast-confirm.js',
-    library: 'vue-toast-confirm',
-    libraryTarget: 'umd',
-    umdNamedDefine: true 
+    filename: 'build.js',
+    // filename: 'vue-toast-confirm.js',
+    // library: 'vue-toast-confirm',
+    // libraryTarget: 'umd',
+    // umdNamedDefine: true 
   },
-  externals: {
-    vue: {
-      root: 'Vue',
-      commonjs: 'vue',
-      commonjs2: 'vue',
-      amd: 'vue'
-    }
-  },
+  // externals: {
+  //   vue: {
+  //     root: 'Vue',
+  //     commonjs: 'vue',
+  //     commonjs2: 'vue',
+  //     amd: 'vue'
+  //   }
+  // },
   resolve: {
       extensions: ['', '.js', '.vue']
   },

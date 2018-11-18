@@ -30,7 +30,7 @@ export default {
       this.$toast({
         type: 'error',
         msg: 'okokokoko',
-        duration: 50000
+        duration: 1500
       })
     },
     showSide () {
